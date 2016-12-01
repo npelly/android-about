@@ -20,14 +20,16 @@ import java.util.List;
 
 public class CertificateUtil {
     /**
-     * Convenience aliases for some popular certificate SHA1's.
+     * Convenience aliases for public certificate SHA1 hash/signatures.
+     *
+     * This is far from an exhausitive set, just some of the most popular & well known.
      */
     private static final List<Pair<byte[], String>> SHA1_ALIASES = createSha1AliasList(new String[]{
             "Android release-keys", "38:91:8A:45:3D:07:19:93:54:F8:B1:9A:F0:5E:C6:56:2C:ED:57:88",
             "Clockwork release-keys", "A1:97:F9:21:2F:2F:ED:64:F0:FF:9C:2A:4E:DF:24:B9:C8:80:1C:8C",
             "Samsung release-keys", "9C:A5:17:0F:38:19:19:DF:E0:44:6F:CD:AB:18:B1:9A:14:3B:31:63",
             "Google release-keys", "24:BB:24:C0:5E:47:E0:AE:FA:68:A5:8A:76:61:79:D9:B6:13:A6:00",
-            "About release-keys", "E5:5D:72:17:28:DC:B2:52:48:68:E6:9D:B6:57:17:0F:4E:BA:F7:D1",
+            "About release-keys", "99:5E:B5:0C:43:56:6C:EA:97:C9:7F:B0:D0:00:E3:49:93:69:E5:12",
     });
 
     private static ArrayList<Pair<byte[], String>> createSha1AliasList(String[] rawList) {
