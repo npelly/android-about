@@ -1,0 +1,49 @@
+====== ABOUT ======
+
+Android About is an Android utility app for developers & testers who juggle APK variations. It
+quickly shows the version name, version code, and certificate hash / signature for installed APKs
+and for the base system image.
+
+The certificate hash is particularly useful when switching between debug and release versions of an
+APK.
+
+Android About runs on Phone/Tablet (including as a widget), Wear and TV.
+
+Q. Why not use Android->Settings?
+A. Android Settings isn't great for disambiguation of different certificate versions etc, and isn't
+as quick.
+
+====== SOURCE ======
+
+This is an Android Studio project, it should open & build cleanly within Android Studio.
+
+common/
+    Shared library with most of the logic.
+mobile/
+    Phone & Tablet UI
+wear/
+    Wear UI
+
+Add aliases for well known certificate hashes into CertificateUtil.java.
+
+Consider adding Detailer subclasses to provide more detail for APKs, for example to
+convert version names and version codes into developer/tester friendly codenames.
+
+====== BUILDING & INSTALLING ======
+
+./gradlew assembleDebug
+
+adb install -r mobile/build/outputs/apk/mobile-debug.apk   # phone/tablet/tv
+# or
+adb install -r wear/build/outputs/apk/wear-debug.apk       # wear
+
+(or load it up as an Android Studio project)
+
+====== CHANGELOG ======
+
+v2
+    Initial open-source version.
+    Supports Phone/Tablet, Wear, TV
+
+v2.0.1
+    Minor fixes

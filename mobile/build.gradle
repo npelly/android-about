@@ -1,0 +1,40 @@
+apply plugin: 'com.android.application'
+
+def aboutVersionMajor = 2
+def aboutVersionMinor = 0
+def aboutVersionPatch = 1
+
+def aboutVersionCode = aboutVersionMajor * 1000 + aboutVersionMinor * 100 + aboutVersionPatch
+def aboutVersionName = "${aboutVersionMajor}.${aboutVersionMinor}.${aboutVersionPatch}"
+
+android {
+    compileSdkVersion 22
+    buildToolsVersion "23.0.2"
+
+    defaultConfig {
+        applicationId "org.npelly.android.about"
+        minSdkVersion 15
+        targetSdkVersion 22
+        versionCode aboutVersionCode
+        versionName "${aboutVersionName}"
+    }
+    // TODO: figure out why buildConfigField is not working
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "boolean", "D", "false"
+        }
+        debug {
+            buildConfigField "boolean", "D", "true"
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    wearApp project(':wear')
+    compile 'com.android.support:appcompat-v7:22.2.0'
+    compile 'com.android.support:support-v4:22.2.0'
+    compile project(':common')
+}
