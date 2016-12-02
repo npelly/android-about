@@ -83,7 +83,7 @@ public class CertificateUtil {
                 PublicKey key = certificate.getPublicKey();
 
                 if (!(key instanceof RSAPublicKey)) {
-                    // TODO: figure out how to handle OpenSSLDSAPublicKey
+                    // TODO: figure out how to handle OpenSSLDSAPublicKey and BCDSAPublicKey
                     Log.w(About.TAG, String.format("%s has unknown key class %s",
                             packageInfo.packageName, key.getClass().getSimpleName()));
                     continue;

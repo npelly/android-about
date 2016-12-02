@@ -132,6 +132,11 @@ public class TextManager {
             return;
         }
 
+        String certString = "<unknown>";
+        if (detail.certificateStrings.length > 0) {
+            certString = detail.certificateStrings[0];
+        }
+
         String updateDateTime = DateFormat.getDateTimeInstance().format(
                 new Date(detail.packageInfo.lastUpdateTime));
 
@@ -146,9 +151,8 @@ public class TextManager {
                 detail.name,
                 detail.longVersionString,
                 detail.packageInfo.packageName,
-                detail.certificateStrings[0],
+                certString,
                 updateDateTime);
-
     }
 
     private static void savePackages(Context context, List<String> packages) {
