@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 def aboutVersionMajor = 2
 def aboutVersionMinor = 0
-def aboutVersionPatch = 1
+def aboutVersionPatch = 2
 
 def aboutVersionCode = aboutVersionMajor * 1000 + aboutVersionMinor * 100 + aboutVersionPatch
 def aboutVersionName = "${aboutVersionMajor}.${aboutVersionMinor}.${aboutVersionPatch}"
