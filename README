@@ -52,8 +52,7 @@ adb install -r mobile/build/outputs/apk/mobile-release.apk
 ====== PUBLISH A RELEASE ======
 
 cp mobile/build/outputs/apk/mobile-release.apk releases/about-[VERSION].apk
-# git commi
-
+# git commit -a, git push, copy to play store, etc
 
 ====== CHANGELOG ======
 
