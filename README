@@ -1,3 +1,9 @@
+====== INSTALL ======
+
+Available on Play Store:
+
+https://play.google.com/store/apps/details?id=org.npelly.android.about
+
 ====== ABOUT ======
 
 What APK am I running?!
@@ -62,3 +68,7 @@ v2
 
 v2.0.1
     Minor fixes
+
+v2.0.2
+	Fixes crash: exception when certificate key type is OpenSSLDSAPublicKey
+	or BCDSAPublicKey.
