@@ -1,22 +1,15 @@
 apply plugin: 'com.android.application'
 
-def aboutVersionMajor = 2
-def aboutVersionMinor = 0
-def aboutVersionPatch = 2
-
-def aboutVersionCode = aboutVersionMajor * 1000 + aboutVersionMinor * 100 + aboutVersionPatch
-def aboutVersionName = "${aboutVersionMajor}.${aboutVersionMinor}.${aboutVersionPatch}"
-
 android {
-    compileSdkVersion 22
-    buildToolsVersion "23.0.2"
+    compileSdkVersion rootProject.compileSdkVersion
+    buildToolsVersion rootProject.buildToolsVersion
 
     defaultConfig {
-        applicationId "org.npelly.android.about"
-        minSdkVersion 15
-        targetSdkVersion 22
-        versionCode aboutVersionCode
-        versionName "${aboutVersionName}"
+        applicationId rootProject.applicationId
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.compileSdkVersion
+        versionCode rootProject.versionCode
+        versionName rootProject.versionName
     }
     // TODO: figure out why buildConfigField is not working
     buildTypes {
