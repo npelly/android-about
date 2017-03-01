@@ -1,16 +1,9 @@
 # Android About
 
-*Quick, detailed info about APK's installed.*
+*Quick access to meta-data of installed Android packages.*
 
-### Install
 
-Available on Play Store:
-
-https://play.google.com/store/apps/details?id=org.npelly.android.about
-
-### About Android About
-
-Am I running debug or release APK? Which version is it again?
+Am I running debug or release APK? Which version do I have installed?
 
 Android About is an Android utility app for developers & testers who juggle multiple APK variants.
 It quickly shows the version name, version code, and certificate hash / signature for installed APKs
@@ -21,6 +14,14 @@ Android About runs on Phone/Tablet (including a widget), Wear and TV.
 Q. Why not use Android->Settings?
 A. Android Settings isn't great for disambiguation of different certificate
 versions etc, and isn't as quick.
+
+
+### Install
+
+Available on Play Store:
+
+https://play.google.com/store/apps/details?id=org.npelly.android.about
+
 
 ### SOURCE
 
@@ -68,20 +69,24 @@ adb install -r mobile/build/outputs/apk/mobile-release.apk
 
 ### PUBLISH
 
-````
+```
 cp mobile/build/outputs/apk/mobile-release.apk releases/about-[VERSION].apk
 # git commit -a, git push, copy to play store, etc
 ```
 
 ### CHANGELOG
 
-v2
-    Initial open-source version.
-    Supports Phone/Tablet, Wear, TV
-
-v2.0.1
-    Minor fixes
+```
+v2.0.3
+    Initial introdution of view pager to switch between pinned package & all packages.
 
 v2.0.2
-	Fixes crash: exception when certificate key type is OpenSSLDSAPublicKey
-	or BCDSAPublicKey.
+    Fixes crash: exception when certificate key type is OpenSSLDSAPublicKey or BCDSAPublicKey.
+
+v2.0.1
+    Minor fixes.
+
+v2.0.0
+    Initial open-source version.
+    Supports Phone/Tablet, Wear, TV
+```

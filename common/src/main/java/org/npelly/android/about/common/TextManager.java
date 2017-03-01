@@ -3,6 +3,9 @@ package org.npelly.android.about.common;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.SystemClock;
@@ -43,6 +46,7 @@ public class TextManager {
 
     private Spanned widgetText;
     private Spanned activityText;
+    private Spanned allText;
 
     public TextManager(Context context) {
         this.context = context.getApplicationContext();
@@ -61,6 +65,13 @@ public class TextManager {
             generateText();
         }
         return activityText;
+    }
+
+    public synchronized Spanned getAllText() {
+        if (allText == null) {
+            generateText();
+        }
+        return allText;
     }
 
     public synchronized void addCallback(Callback callback) {
@@ -96,8 +107,14 @@ public class TextManager {
 
         StringBuilder widgetTextBuilder = new StringBuilder();
         StringBuilder activityTextBuilder = new StringBuilder();
+        StringBuilder allTextBuilder = new StringBuilder();
+
         java.util.Formatter widgetTextFormatter = new java.util.Formatter(widgetTextBuilder);
         java.util.Formatter activityTextFormatter = new java.util.Formatter(activityTextBuilder);
+        java.util.Formatter allTextFormatter = new java.util.Formatter(allTextBuilder);
+
+        //TODO cache allPackages
+        List<PackageInfo> allPackages = About.get().getContext().getPackageManager().getInstalledPackages(0);
 
         for (String packageName : DEFAULT_PACKAGES) {
             writeTextForPackage(packageName, false, widgetTextFormatter, activityTextFormatter);
@@ -105,9 +122,13 @@ public class TextManager {
         for (String packageName : customPackages) {
             writeTextForPackage(packageName, true, widgetTextFormatter, activityTextFormatter);
         }
+        for (PackageInfo pkg : allPackages) {
+            writeTextForPackage(pkg.packageName, true, null, allTextFormatter);
+        }
 
         widgetText = Html.fromHtml(widgetTextBuilder.toString());
         activityText = Html.fromHtml(activityTextBuilder.toString());
+        allText = Html.fromHtml(allTextBuilder.toString());
 
         long delta = SystemClock.elapsedRealtime() - start;
         Log.i(About.TAG, String.format("TextManager generateText() completed in %d ms", delta));
@@ -140,9 +161,11 @@ public class TextManager {
         String updateDateTime = DateFormat.getDateTimeInstance().format(
                 new Date(detail.packageInfo.lastUpdateTime));
 
-        widgetTextFormatter.format(
-                "<b>%s</b>&nbsp&nbsp %s<br>\n",
-                detail.name, detail.longVersionString);
+        if (widgetTextFormatter != null) {
+            widgetTextFormatter.format(
+                    "<b>%s</b>&nbsp&nbsp %s<br>\n",
+                    detail.name, detail.longVersionString);
+        }
         activityTextFormatter.format(
                 "<b>%s</b> %s <br>" +
                         "&nbsp&nbsp&nbsp&nbsp package: %s<br>" +

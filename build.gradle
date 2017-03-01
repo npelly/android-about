@@ -3,10 +3,10 @@
 ext {
     compileSdkVersion = 25
     buildToolsVersion = "25.0.2"
-    minSdkVersion = 15
+    minSdkVersion = 16
 
-    versionCode = 2002
-    versionName = "2.0.2"
+    versionCode = 2003
+    versionName = "2.0.3"
 
     applicationId = "org.npelly.android.about"
 }

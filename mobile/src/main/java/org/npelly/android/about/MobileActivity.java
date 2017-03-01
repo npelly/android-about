@@ -1,8 +1,12 @@
 package org.npelly.android.about;
 
 import android.app.AlertDialog;
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v13.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.view.View;
@@ -14,70 +18,52 @@ import android.widget.TextView;
 import org.npelly.android.about.common.About;
 import org.npelly.android.about.common.TextManager;
 
-// TODO: A "download updates from go/android-about" banner
-public class MobileActivity extends AppCompatActivity implements View.OnClickListener, TextManager.Callback {
+public class MobileActivity extends AppCompatActivity {
+
+    public static class MyPagerAdapter extends FragmentPagerAdapter {
+        private static int NUM_ITEMS = 2;
+        public MyPagerAdapter(FragmentManager fragmentManager) {
+            super(fragmentManager);
+        }
+        @Override
+        public int getCount() {
+            return NUM_ITEMS;
+        }
+        @Override
+        public Fragment getItem(int position) {
+            switch (position) {
+                case 0: return PinnedAppsFragment.newInstance();
+                case 1: return AllAppsFragment.newInstance();
+                default: return null;
+            }
+        }
+        @Override
+        public CharSequence getPageTitle(int position) {
+            switch (position) {
+                case 0: return PinnedAppsFragment.getPageTitle();
+                case 1: return AllAppsFragment.getPageTitle();
+                default: return null;
+            }
+        }
+    }
+
+    FragmentPagerAdapter fragmentPagerAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         About.logd("MobileActivity onCreate()");
 
         setContentView(R.layout.activity_mobile);
-        onTextChanged();
 
-        About.get().getTextManager().addCallback(this);
-
-        ImageButton button = (ImageButton)findViewById(R.id.add_button);
-        button.setOnClickListener(this);
+        ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
+        fragmentPagerAdapter = new MyPagerAdapter(getFragmentManager());
+        viewPager.setAdapter(fragmentPagerAdapter);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         About.logd("MobileActivity onDestroy()");
-
-        About.get().getTextManager().removeCallback(this);
-    }
-
-    /**
-     * Called when text content needs to be updated
-     */
-    @Override
-    public void onTextChanged() {
-        About.logd("MobileActivity onTextChanged()");
-
-        TextView textView = (TextView)findViewById(R.id.activity_text);
-        textView.setText(About.get().getTextManager().getActivityText());
-    }
-
-    /**
-     * Called when the add button is clicked
-     */
-    @Override
-    public void onClick(View view) {
-        About.logd("MobileActivity onClick()");
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Add Package");
-        final EditText input = new EditText(this);
-
-        input.setInputType(InputType.TYPE_CLASS_TEXT);
-        builder.setView(input);
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                TextManager textManager = About.get().getTextManager();
-                textManager.addPackage(input.getText().toString());
-                textManager.generateText();
-            }
-        });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-
-        AlertDialog dialog = builder.show();
-        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
     }
 }
