@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId rootProject.applicationId
-        minSdkVersion rootProject.minSdkVersion
+        minSdkVersion 25
         targetSdkVersion rootProject.compileSdkVersion
         versionCode androidGitVersion.code()
         versionName androidGitVersion.name()
