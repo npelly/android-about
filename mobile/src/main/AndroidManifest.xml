@@ -3,14 +3,14 @@
     package="org.npelly.android.about">
 
     <application
-        android:name="org.npelly.android.about.MobileApplication"
+        android:name=".MobileApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
     >
         <activity
-            android:name="org.npelly.android.about.MobileActivity"
+            android:name=".MobileActivity"
             android:label="@string/app_name"
             android:launchMode="singleTask">
             <intent-filter>
@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name="org.npelly.android.about.WidgetProvider">
+        <receiver android:name=".WidgetProvider">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
                 <action android:name="android.appwidget.action.APPWIDGET_ENABLED" />
@@ -33,7 +33,7 @@
                 android:resource="@xml/widget_info" />
         </receiver>
 
-        <receiver android:name="org.npelly.android.about.PackageChangeReceiver" >
+        <receiver android:name=".PackageChangeReceiver" >
             <intent-filter>
                 <action android:name="android.intent.action.PACKAGE_ADDED" />
                 <action android:name="android.intent.action.PACKAGE_REMOVED" />

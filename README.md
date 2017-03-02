@@ -59,34 +59,27 @@ Or, load & build as an Android Studio project.
 #### RELEASE
 
 ```
-./gradlew assembleRelease
-PATH=$PATH:[BUILD TOOLS]   # example: ~/Library/Android/sdk/build-tools/25.0.1/
-zipalign -f -p 4 mobile/build/outputs/apk/mobile-release-unsigned.apk mobile/build/outputs/apk/mobile-release.apk
-apksigner sign --ks [path-to]/org.npelly.android.about.keystore.jks mobile/build/outputs/apk/mobile-release.apk
-
-adb install -r mobile/build/outputs/apk/mobile-release.apk
+# VERSION in format vX.Y, for example "v2.3"
+git tag VERSION
+git push origin VERSION
 ```
 
-### PUBLISH
-
-```
-cp mobile/build/outputs/apk/mobile-release.apk releases/about-[VERSION].apk
-# git commit -a, git push, copy to play store, etc
-```
+Gradle scripts generate version code and version name from this git tag, and
+http://www.buddybuild.com will auto-generate a signed release build on new git tags.
 
 ### CHANGELOG
 
 ```
-v2.0.3
+v2.3
     Initial introdution of view pager to switch between pinned package & all packages.
 
-v2.0.2
+v2.2
     Fixes crash: exception when certificate key type is OpenSSLDSAPublicKey or BCDSAPublicKey.
 
-v2.0.1
+v2.1
     Minor fixes.
 
-v2.0.0
+v2.0
     Initial open-source version.
     Supports Phone/Tablet, Wear, TV
 ```

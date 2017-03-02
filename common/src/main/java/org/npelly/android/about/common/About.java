@@ -12,8 +12,7 @@ public class About {
     private static About singleton;
 
     public static void logd(String fmt, Object... args) {
-        // TODO: figure out why buildConfigField is not working
-        if (true) {
+        if (BuildConfig.DEBUG) {
             Log.d(TAG, String.format(fmt, args));
         }
     }

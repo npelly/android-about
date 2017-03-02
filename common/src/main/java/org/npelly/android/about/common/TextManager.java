@@ -33,7 +33,8 @@ public class TextManager {
             "com.google.android.apps.maps",
             "com.google.android.apps.gmm",
             "com.google.android.googlequicksearchbox",
-            "org.npelly.android.about"
+            "org.npelly.android.about",
+            "org.npelly.android.about.debug"
     );
 
     public interface Callback {
