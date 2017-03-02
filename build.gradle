@@ -18,6 +18,7 @@ buildscript {
 plugins {
     id 'com.gladed.androidgitversion' version '0.3.3'
 }
+
 // Versioning:
 //   "2.2"           / 2002000    Tagged release
 //   "2.2.5-782f34d" / 2001005    Commit 5 since last release
