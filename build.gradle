@@ -1,15 +1,5 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
-ext {
-    compileSdkVersion = 25
-    buildToolsVersion = "25.0.2"
-    minSdkVersion = 16
-
-    versionCode = 2003
-    versionName = "2.0.3"
-
-    applicationId = "org.npelly.android.about"
-}
 
 buildscript {
     repositories {
@@ -21,6 +11,30 @@ buildscript {
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
+}
+
+// Create androidGitVersion.name() and androidGitVersion.code() from git tags
+// See https://github.com/gladed/gradle-android-git-version for more info
+plugins {
+    id 'com.gladed.androidgitversion' version '0.3.3'
+}
+// Versioning:
+//   "2.2"           / 2002000    Tagged release
+//   "2.2.5-782f34d" / 2001005    Commit 5 since last release
+// NOTE: using Major.Minor.Commit (and not patch numbers)
+androidGitVersion {
+    codeFormat = 'MNNNBBB'
+    format = '%tag%%.count%%-commit%%-branch%%-dirty%'
+    prefix = 'v'
+}
+
+// Constants shared between all modules
+ext {
+    compileSdkVersion = 25
+    buildToolsVersion = "25.0.2"
+    minSdkVersion = 16
+
+    applicationId = "org.npelly.android.about"
 }
 
 allprojects {

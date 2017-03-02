@@ -8,8 +8,8 @@ android {
         applicationId rootProject.applicationId
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.compileSdkVersion
-        versionCode rootProject.versionCode
-        versionName rootProject.versionName
+        versionCode androidGitVersion.code()
+        versionName androidGitVersion.name()
     }
     buildTypes {
         release {
