@@ -53,11 +53,14 @@ public class CertificateUtil {
         return data;
     }
 
-    public static String sha1ToAlias(byte[] sha1) {
+    public static String sha1ToAlias(Signature sig, byte[] sha1) {
         for (Pair<byte[], String> sha1Alias : SHA1_ALIASES) {
             if (Arrays.equals(sha1Alias.first, sha1)) {
                 return sha1Alias.second;
             }
+        }
+        if (About.get().getPackageDetailManager().isSystemSignature(sig)) {
+            return "System keys";
         }
         return null;
     }
@@ -92,11 +95,13 @@ public class CertificateUtil {
                 MessageDigest messageDigest = MessageDigest.getInstance("SHA1");
                 byte[] sha1 = messageDigest.digest(certificate.getEncoded());
 
-                if (sha1ToAlias(sha1) == null) {
-                    Log.i(About.TAG, String.format("no sha1 alias for %s %s",
-                            sha1ToString(sha1, sha1.length),
-                            certificate.getSubjectDN().toString()));
-                    // Log.i(About.TAG, certificate.toString());
+                if (sha1ToAlias(signature, sha1) == null) {
+                    if (false) {
+                        Log.d(About.TAG, String.format("no sha1 alias for %s %s",
+                                sha1ToString(sha1, sha1.length),
+                                certificate.getSubjectDN().toString()));
+                        Log.d(About.TAG, certificate.toString());
+                    }
                 }
                 hashes.add(sha1);
             } catch (CertificateException | NoSuchAlgorithmException e) {

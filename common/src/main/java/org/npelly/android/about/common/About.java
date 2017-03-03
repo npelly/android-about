@@ -1,6 +1,7 @@
 package org.npelly.android.about.common;
 
 import android.content.Context;
+import android.os.Looper;
 import android.util.Log;
 
 /**
@@ -11,10 +12,22 @@ public class About {
 
     private static About singleton;
 
+    public static void logw(String fmt, Object... args) {
+        Log.w(TAG, String.format(fmt, args));
+    }
+
+    public static void logi(String fmt, Object... args) {
+        Log.i(TAG, String.format(fmt, args));
+    }
+
     public static void logd(String fmt, Object... args) {
         if (BuildConfig.DEBUG) {
             Log.d(TAG, String.format(fmt, args));
         }
+    }
+
+    public static void assertMainThread() {
+        if (Looper.getMainLooper() != Looper.myLooper()) throw new RuntimeException("Bad thread");
     }
 
     public static void createSingleton(Context context) {
@@ -31,19 +44,24 @@ public class About {
     }
 
     private final Context context;  // Application context
-    private final TextManager textManager;
+    private final PackageDetailManager packageDetailManager;
+    private final PrefManager prefManager;
 
     private About(Context context) {
         this.context = context.getApplicationContext();
-        textManager = new TextManager(this.context);
-//        packageManager = this.context.getPackageManager();
+        prefManager = new PrefManager(this.context);
+        packageDetailManager = new PackageDetailManager(this.context);
     }
 
-    public TextManager getTextManager() {
-        return textManager;
+    public PackageDetailManager getPackageDetailManager() {
+        return packageDetailManager;
     }
 
     public Context getContext() {
         return context;
+    }
+
+    public PrefManager getPrefManager() {
+        return prefManager;
     }
 }

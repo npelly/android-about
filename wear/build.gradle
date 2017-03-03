@@ -24,7 +24,12 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    provided 'com.google.android.wearable:wearable:2.0.0'
     compile 'com.google.android.support:wearable:2.0.0'
     compile 'com.google.android.gms:play-services-wearable:10.2.0'
-    compile project(':common')
+
+    // work-around for gradle-doesn't-build-libraries-in-debug bug,
+    // see http://stackoverflow.com/questions/27277433
+    debugCompile project(path: ':common', configuration: "debug")
+    releaseCompile project(path: ':common', configuration: "release")
 }

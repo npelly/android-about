@@ -12,6 +12,6 @@ public class WearApplication extends Application {
     public void onCreate(){
         super.onCreate();
         About.createSingleton(this);
-        About.get().getTextManager().generateText();
+        About.get().getPackageDetailManager().generateText();
     }
 }

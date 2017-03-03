@@ -13,7 +13,7 @@ public class MobileApplication extends Application {
         super.onCreate();
         About.logd("MobileApplication onCreate()");
         About.createSingleton(this);
-        About.get().getTextManager().generateText();
-        About.get().getTextManager().addCallback(WidgetProvider.CALLBACK);
+        About.get().getPackageDetailManager().addWidgetCallback(WidgetProvider.CALLBACK);
+        About.get().getPackageDetailManager().init();
     }
 }
