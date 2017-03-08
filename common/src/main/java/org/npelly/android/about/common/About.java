@@ -8,7 +8,7 @@ import android.util.Log;
  * God singleton to track & manage all active UI.
  */
 public class About {
-    public static final String TAG = "About";
+    public static final String TAG = BuildConfig.DEBUG ? "AboutDebug" : "About";
 
     private static About singleton;
 

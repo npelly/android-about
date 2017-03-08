@@ -162,6 +162,7 @@ public class PackageDetailAdapter extends RecyclerView.Adapter<PackageDetailAdap
 
     @Override
     public void onInitComplete(Collection<PackageDetail> initDetails) {
+        packageDetails.clear();
         for (PackageDetail detail : initDetails) {
             if (isType(detail)) {
                 packageDetails.add(detail);
